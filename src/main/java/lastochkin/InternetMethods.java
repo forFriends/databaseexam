@@ -45,7 +45,7 @@ public class InternetMethods {
     }
 
     public  void getUrl() {
-        driver.get(ConfigProperties.getConfigProperty("url_website"));
+        driver.get(ConfigProperties.getConfigProperty("uselessfacts.url"));
         waitForPageLoad(driver);
 
     }
