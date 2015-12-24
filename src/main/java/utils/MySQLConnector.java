@@ -29,8 +29,8 @@ public abstract class MySQLConnector {
         runSql();
         ArrayList<String> selectFirstRow;
         try {
-            Connection connection = DriverManager.getConnection(getConfigProperty("url_database"),
-                    getConfigProperty("username_database"), getConfigProperty("password_database"));
+            Connection connection = DriverManager.getConnection(getConfigProperty("mysql.jdbcString"),
+                    getConfigProperty("mysql.username"), getConfigProperty("mysql.password"));
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             selectFirstRow = new ArrayList<String>();
@@ -53,8 +53,8 @@ public abstract class MySQLConnector {
     public static void executeQueries(ArrayList<String> interestingFacts) {
         runSql();
         try {
-            Connection connection = DriverManager.getConnection(getConfigProperty("url_database"),
-                    getConfigProperty("username_database"), getConfigProperty("password_database"));
+            Connection connection = DriverManager.getConnection(getConfigProperty("mysql.jdbcString"),
+                    getConfigProperty("mysql.username"), getConfigProperty("mysql.password"));
             Statement statement = connection.createStatement();
             for (int i = 0; i < interestingFacts.size(); i++) {
                 String text = "INSERT INTO interesting VALUES(NULL," + "\"" + interestingFacts.get(i) + "\");";
@@ -71,8 +71,8 @@ public abstract class MySQLConnector {
     public static void clearTheTable(String fullTableName)throws  SQLException{
         runSql();
 
-        Connection connection = DriverManager.getConnection(getConfigProperty("url_database"),
-                    getConfigProperty("username_database"), getConfigProperty("password_database"));
+        Connection connection = DriverManager.getConnection(getConfigProperty("mysql.jdbcString"),
+                    getConfigProperty("mysql.username"), getConfigProperty("mysql.password"));
 
         Statement statement = connection.createStatement();
         statement.execute("DELETE FROM "+ fullTableName + ";");
@@ -81,8 +81,8 @@ public abstract class MySQLConnector {
     public static ArrayList<Object> getResultSet(String sqlQuery) throws SQLException {
         runSql();
 
-        Connection connection = DriverManager.getConnection(getConfigProperty("url_database"),
-                getConfigProperty("username_database"), getConfigProperty("password_database"));
+        Connection connection = DriverManager.getConnection(getConfigProperty("mysql.jdbcString"),
+                getConfigProperty("mysql.username"), getConfigProperty("mysql.password"));
 
         ArrayList<Object> sms = new ArrayList<Object>();
         try {
