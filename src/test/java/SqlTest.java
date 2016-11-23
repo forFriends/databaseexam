@@ -1,9 +1,7 @@
 import lastochkin.InternetMethods;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
-import utils.MySQLConnector;
 
 
 import java.sql.SQLException;
