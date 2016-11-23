@@ -13,7 +13,7 @@ public abstract class MySQLConnector {
     //private static final String USERNAME = "root";
    // private static final String PASSWORD = "19876245";
 
-    public static void runSql() {
+    private static void runSql() {
         try {
             Driver driver = new FabricMySQLDriver();
             DriverManager.registerDriver(driver);
@@ -37,15 +37,12 @@ public abstract class MySQLConnector {
             while (resultSet.next()) {
                 selectFirstRow.add(resultSet.getString("fact"));
             }
-
-
         } catch (SQLException e) {
             System.out.println("Error in mySQL query!");
             e.printStackTrace();
             return null;
         }
-        String fifthRow = selectFirstRow.get(5);
-        return fifthRow;
+        return selectFirstRow.get(5);
 
     }
 
@@ -56,8 +53,8 @@ public abstract class MySQLConnector {
             Connection connection = DriverManager.getConnection(getConfigProperty("mysql.jdbcString"),
                     getConfigProperty("mysql.username"), getConfigProperty("mysql.password"));
             Statement statement = connection.createStatement();
-            for (int i = 0; i < interestingFacts.size(); i++) {
-                String text = "INSERT INTO interesting VALUES(NULL," + "\"" + interestingFacts.get(i) + "\");";
+            for (String interestingFact : interestingFacts) {
+                String text = "INSERT INTO interesting VALUES(NULL," + "\"" + interestingFact + "\");";
                 statement.execute(text);
             }
 
@@ -94,7 +91,9 @@ public abstract class MySQLConnector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        for (Object sm : sms) {
+            System.out.println(sm.toString());
+        }
         return sms;
     }
 }

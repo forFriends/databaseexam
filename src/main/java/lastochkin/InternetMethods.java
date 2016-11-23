@@ -1,5 +1,6 @@
 package lastochkin;
 
+import org.openqa.selenium.firefox.FirefoxDriver;
 import utils.ConfigProperties;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,16 +20,13 @@ import java.util.concurrent.TimeUnit;
 
 public class InternetMethods {
 
-    static ChromeOptions option = new ChromeOptions();
-
     public static WebDriver driver;
 
     public static WebDriver getWebDriver() {
-        option.setBinary(new File("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"));
-
         if(driver == null){
-        driver = new ChromeDriver(option);
-        driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+            System.setProperty("webdriver.gecko.driver", "/home/lastochkin/geckodriver");
+            driver = new FirefoxDriver();
+            driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
         return driver;}
         else return driver;
     }
@@ -40,18 +38,17 @@ public class InternetMethods {
                         return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
                     }
                 };
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(pageLoadCondition);
     }
 
     public  void getUrl() {
         driver.get(ConfigProperties.getConfigProperty("uselessfacts.url"));
         waitForPageLoad(driver);
-
     }
 
 
-    @FindAll(@FindBy(how = How.XPATH, using = "//*[@id=\"post-7\"]/div/div[*]/div/p"))
+    @FindAll(@FindBy(how = How.XPATH, using = "//a[@class=\"list-group-item\"]"))
     List<WebElement> list;
 
 
