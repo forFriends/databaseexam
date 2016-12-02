@@ -31,12 +31,11 @@ public class SqlTest {
         internetMethods.getUrl();
         ArrayList<String> interestingFacts = internetMethods.getTextFromWebsiteToArrayList();
         executeQueries(interestingFacts);
-        String fifthSql = returnOneRow("SELECT fact FROM interesting;");
+        String sixthSql = returnOneRow("SELECT fact FROM interesting;");
 
-        assertThat("Text is not matched!", fifthSql, is("Orville and Wilbur Wright designed and flew their" +
-                " Flyer plane in December 1903. Five people were said to have witnessed the flight including John T. " +
-                "Daniels who took photographic evidence. Claims that Whitehead beat the Wright Brothers to the record " +
-                "first emerged in 1937"));
+        assertThat("Text is not matched!", sixthSql, is("Color tells us about the temperature of a candle flame. " +
+                "The inner core of the candle flame is light blue, with a temperature of around 1670 K (1400 °C). That " +
+                "is the hottest part of the flame. The colour inside the flame becomes yellow, orange, and finally red."));
 
 
     }

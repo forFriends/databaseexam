@@ -44,20 +44,19 @@ public abstract class MySQLConnector {
             e.printStackTrace();
             return null;
         }
-        String fifthRow = selectFirstRow.get(5);
-        return fifthRow;
+        return selectFirstRow.get(5);
 
     }
 
 
-    public static void executeQueries(ArrayList<String> interestingFacts) {
+    public static void executeQueries(ArrayList<String> interFacts) {
         runSql();
         try {
             Connection connection = DriverManager.getConnection(getConfigProperty("mysql.jdbcString"),
                     getConfigProperty("mysql.username"), getConfigProperty("mysql.password"));
             Statement statement = connection.createStatement();
-            for (int i = 0; i < interestingFacts.size(); i++) {
-                String text = "INSERT INTO interesting VALUES(NULL," + "\"" + interestingFacts.get(i) + "\");";
+            for (int i = 0; i < interFacts.size(); i++) {
+                String text = "INSERT INTO interesting VALUES(NULL," + "\"" + interFacts.get(i) + "\");";
                 statement.execute(text);
             }
 
